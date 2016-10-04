@@ -1,5 +1,7 @@
 module.exports = function(myApp) {
 
+console.log('instantiating error handlers');
+
 	/***************************************
 	 * RESTANGULAR ERROR HANDLER (API CALLS)
 	 ***************************************/
