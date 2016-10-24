@@ -4,7 +4,7 @@ module.exports = function(myApp) {
 	 * RESTANGULAR INTERCEPTOR FUNCTIONS
 	 ***************************************/
 
-	myApp.config(function(RestangularProvider) {
+	myApp.config(function(RestangularProvider,$httpProvider) {
 
 	    var token = window.localStorage.getItem("http://kpadmin-jwt");
 	    if(typeof token == 'object' && token == null){
@@ -61,14 +61,10 @@ module.exports = function(myApp) {
 	        return { element: element, params: params };
 	    });
 
-	});
-
 
 	/***************************************
 	 * POST-RESTANGULAR INTERCEPTOR FUNCTIONS
 	 ***************************************/
-
-	myApp.config(function ($httpProvider) {
 	    
 	    // USING 'unshift' TO RUN THESE FUNCTIONS FIRST!!!!
 	    $httpProvider.interceptors.unshift(addContentTypeToHeader);
@@ -76,7 +72,6 @@ module.exports = function(myApp) {
 	    // these functions run in regular order (after Restangular interceptors)
 	    $httpProvider.interceptors.push(fixStamplayIssues);
 
-	// **************************************************************************
 
 	    /*
 	     * FIX ISSUES FOR STAMPLAY API
@@ -101,6 +96,9 @@ module.exports = function(myApp) {
 	    function fixStamplayIssues($q) {
 	        return {
 	            request : function(config) {
+
+// console.log('in fixStamplayIssues()');
+
 	                config = angular.copy(config);
 
 	                // When NG-Admin does a list GET, it receives all fields for 
@@ -148,13 +146,13 @@ module.exports = function(myApp) {
 	                            delete config.params._filters[key];
 	                        }
 	                    }
-	console.log('where',where);
+// console.log('where',where);
 	                    // if all the previous fixes have emptied the NGA filter object, 
 	                    // then delete it
 	                    if(isEmpty(config.params._filters)){
 	                        delete config.params._filters;
 	                    }
-
+// console.log('config',config);
 	                }
 
 	                return config || $q.when(config);
@@ -191,15 +189,14 @@ module.exports = function(myApp) {
 	        return true;
 	    }
 
-	});
 
 	/********************************************
 	 * RESTANGULAR response INTERCEPTOR FUNCTIONS
 	 ********************************************/
 
-	myApp.config(function(RestangularProvider) {
-
 	    RestangularProvider.addResponseInterceptor(function(data,operation,what,url,response,deferred){
+
+			//console.log('in addResponseInterceptor');
 
 	        var newResponse;
 	        //console.log('Response',response);
@@ -224,13 +221,13 @@ module.exports = function(myApp) {
 	            //console.log('num of entries retrieved by Restangular',contentRange);
 	            response.totalCount = contentRange;
 	        }
-	        
+
+			//console.log('newResponse',newResponse);
+
 	        return newResponse;
 
 	    });
 
 	});
 
-	return myApp;
-
-};
+}

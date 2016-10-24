@@ -1,22 +1,21 @@
 module.exports = function(myApp) {
 
-console.log('instantiating error handlers');
-
 	/***************************************
 	 * RESTANGULAR ERROR HANDLER (API CALLS)
 	 ***************************************/
 
-	/*myApp.config(function(RestangularProvider) {
+	myApp.config(function(RestangularProvider) {
 
 	    var refreshAccesstoken = function() {
 	        var deferred = $q.defer();
 
-	        // Refresh access-token logic
+	        // TO DO: Refresh access-token logic
+			console.log('in ',__FILE,'in refreshAccesstoken()');
 
 	        return deferred.promise;
 	    };
 
-	    Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+	    RestangularProvider.setErrorInterceptor(function(response, deferred, responseHandler) {
 	        if(response.status === 403) {
 	            refreshAccesstoken().then(function() {
 	                // Repeat the request and then call the handlers the usual way.
@@ -29,27 +28,39 @@ console.log('instantiating error handlers');
 
 	        return true; // error not handled
 	    });
-	});*/
+	});
 
 	/***************************************
 	 * CUSTOM ERROR MESSAGES
 	 ***************************************/
 
-	// app.errorMessage(function (response) {
-	//     return 'Global error: ' + response.status + '(' + response.data + ')';
-	// });
-
 	function errorHandler($rootScope, $state, $translate, notification) {
+
+		// delete the NG-Admin default error handler
+		delete $rootScope.$$listeners.$stateChangeError;
+
 	    $rootScope.$on("$stateChangeError", function handleError(event, toState, toParams, fromState, fromParams, error) {
-	console.log('error',error);
-	// console.log('event',event);
-	// console.log('toState',toState);
-	// console.log('toParams',toParams);
+
+			console.log('ERROR HANDLER, error',error);
+			// console.log('event',event);
+			// console.log('toState',toState);
+			// console.log('toParams',toParams);
+			// console.log('fromState',fromState);
+			// console.log('fromParams',fromParams);
+
 	        if(error.status == 404) {
 	            $state.go('ma-404');
 	            event.preventDefault();
 	        } else {
-	            $translate('STATE_CHANGE_ERROR', { message: error.message })
+	        	var errorMessage;
+	        	
+	        	if(error.message){
+	        		errorMessage = error.message;
+	        	}else if(error.data.error.message){
+	        		errorMessage = error.data.error.message;
+	        	}
+
+	            $translate('STATE_CHANGE_ERROR', { 'message': errorMessage })
 	            .then(text => notification.log(text, { addnCls: 'humane-flatty-error' }));
 	            throw error;
 	        }
@@ -62,7 +73,7 @@ console.log('instantiating error handlers');
 	    $translateProvider.translations('en', {
 	      'STATE_CHANGE_ERROR': 'Error: {{ message }}'
 	    });
-	    //$translateProvider.preferredLanguage('en');
+	    $translateProvider.preferredLanguage('en');
 	}]);
 
 	return myApp;
