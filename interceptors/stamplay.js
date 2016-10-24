@@ -97,10 +97,10 @@ module.exports = function(myApp) {
 	        return {
 	            request : function(config) {
 
-console.log('in fixStamplayIssues()');
+// console.log('in fixStamplayIssues()');
 
 	                config = angular.copy(config);
-console.log('config',config);
+// console.log('config',config);
 	                // When NG-Admin does a list GET, it receives all fields for 
 	                // that data model, and those fields persist in the dataStore, 
 	                // even if the editionView only defines a couple of fields. 
