@@ -6,28 +6,28 @@ module.exports = function(myApp) {
 
 	myApp.config(function(RestangularProvider) {
 
-	    var refreshAccesstoken = function() {
-	        var deferred = $q.defer();
+	  //   var refreshAccesstoken = function() {
+	  //       var deferred = $q.defer();
 
-	        // TO DO: Refresh access-token logic
-			console.log('in ',__FILE,'in refreshAccesstoken()');
+	  //       // TO DO: Refresh access-token logic
+			// console.log('in ',__FILE,'in refreshAccesstoken()');
 
-	        return deferred.promise;
-	    };
+	  //       return deferred.promise;
+	  //   };
 
-	    RestangularProvider.setErrorInterceptor(function(response, deferred, responseHandler) {
-	        if(response.status === 403) {
-	            refreshAccesstoken().then(function() {
-	                // Repeat the request and then call the handlers the usual way.
-	                $http(response.config).then(responseHandler, deferred.reject);
-	                // Be aware that no request interceptors are called this way.
-	            });
+	  //   RestangularProvider.setErrorInterceptor(function(response, deferred, responseHandler) {
+	  //       if(response.status === 403) {
+	  //           refreshAccesstoken().then(function() {
+	  //               // Repeat the request and then call the handlers the usual way.
+	  //               $http(response.config).then(responseHandler, deferred.reject);
+	  //               // Be aware that no request interceptors are called this way.
+	  //           });
 
-	            return false; // error handled
-	        }
+	  //           return false; // error handled
+	  //       }
 
-	        return true; // error not handled
-	    });
+	  //       return true; // error not handled
+	  //   });
 	});
 
 	/***************************************
