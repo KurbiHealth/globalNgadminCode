@@ -107,14 +107,18 @@ console.log('config',config);
 	                // Which means that the un-editable fields in Stamplay must be 
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
-	                    delete config.data.__v;
-	                    delete config.data._id;
-	                    delete config.data.appId;
-	                    delete config.data.cobjectId;
-	                    delete config.data.dt_create;
-	                    delete config.data.dt_update;
-	                    delete config.data.id;
-	                    delete config.data.actions;
+	                	if(config.file){
+	                		// PLACEHOLDER FOR FUTURE CODE
+	                	}else{
+		                    delete config.data.__v;
+		                    delete config.data._id;
+		                    delete config.data.appId;
+		                    delete config.data.cobjectId;
+		                    delete config.data.dt_create;
+		                    delete config.data.dt_update;
+		                    delete config.data.id;
+		                    delete config.data.actions;
+	                	}
 	                }
 
 	                // translate NGA filter(s) to Stamplay format
