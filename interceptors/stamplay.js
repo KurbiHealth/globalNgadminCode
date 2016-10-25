@@ -21,13 +21,13 @@ module.exports = function(myApp) {
 	  
 	    RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, 
 	        headers, params, httpConfig) {
-	        //console.log('url',angular.copy(url));
-	        //console.log('element: ',element);
-	        //console.log('operation: ',operation);
-	        //console.log('what: ',what);
-	        //console.log('headers: ',headers);
-	        //console.log('params: ',params);
-	        //console.log('httpConfig',httpConfig);
+	        console.log('url',angular.copy(url));
+	        console.log('element: ',element);
+	        console.log('operation: ',operation);
+	        console.log('what: ',what);
+	        console.log('headers: ',headers);
+	        console.log('params: ',params);
+	        console.log('httpConfig',httpConfig);
 
 	        /*
 	         * FIX ISSUES FOR STAMPLAY API
@@ -85,7 +85,7 @@ module.exports = function(myApp) {
 	            request : requestInterceptor
 	        };
 
-	        function requestInterceptor(config,b,c,d,e) {
+	        function requestInterceptor(config) {
 	            if (angular.isDefined(config.headers['Content-Type']) && !angular.isDefined(config.data))
 	                config.data = '';
 
@@ -95,7 +95,7 @@ module.exports = function(myApp) {
 
 	    function fixStamplayIssues($q) {
 	        return {
-	            request : function(config) {
+	            request : function(config,b,c,d,e) {
 
 // console.log('in fixStamplayIssues()');
 
@@ -107,14 +107,6 @@ console.log('config',config,b,c,d,e);
 	                // Which means that the un-editable fields in Stamplay must be 
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
-	                	var url = config.url;
-	                	dataObj = url.substr(url.indexOfLast('/'));
-	                	if(dataObj.search('/') > -1){
-	                		dataObj = dataObj.replace('/','');
-	                	}
-	                	// if dataObj is element and not the id, then add id
-
-
 	                	if(config.file){
 	                		// PLACEHOLDER FOR FUTURE CODE
 	                	}else{
