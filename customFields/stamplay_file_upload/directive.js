@@ -44,6 +44,7 @@ console.log('value',scope.value);
             },
             post: function(scope, element) {
                 var field = scope.field();
+                field.uploadInformation = field._uploadInformation();
                 scope.name = field.name();
                 scope.v = field.validation();
                 if (scope.value) {
@@ -53,6 +54,12 @@ console.log('value',scope.value);
                 var attributes = field.attributes();
                 for (var name in attributes) {
                     input.setAttribute(name, attributes[name]);
+                }
+
+                if(field.uploadInformation.method == 'PUT'){
+                    var id = scope.entry()._identifierValue;
+                    scope.field.uploadInformation.url += '/' + id;
+        console.log('scope in post',scope);
                 }
 
                 // CALLED BELOW IN DIRECTIVE
@@ -66,7 +73,7 @@ console.log('value',scope.value);
 
                     scope.files = {};
                     for (var file in selectedFiles) {
-                        uploadParams = angular.copy(scope.field().uploadInformation());
+                        uploadParams = angular.copy(scope.field.uploadInformation);
                         uploadParams.file = selectedFiles[file];
 
                         // ABOUT TO UPLOAD FILE(S)
