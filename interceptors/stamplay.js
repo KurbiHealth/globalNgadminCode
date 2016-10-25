@@ -4,7 +4,7 @@ module.exports = function(myApp) {
 	 * request RESTANGULAR INTERCEPTOR FUNCTIONS
 	 *******************************************/
 
-	myApp.config(function(RestangularProvider,$httpProvider) {
+	myApp.config(function(RestangularProvider,$httpProvider,$scope) {
 
 	    var token = window.localStorage.getItem("http://kpadmin-jwt");
 	    if(typeof token == 'object' && token == null){
@@ -21,6 +21,7 @@ module.exports = function(myApp) {
 	  
 	    RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, 
 	        headers, params, httpConfig) {
+
 	        console.log('url',angular.copy(url));
 	        console.log('element: ',element);
 	        console.log('operation: ',operation);
@@ -28,12 +29,6 @@ module.exports = function(myApp) {
 	        console.log('headers: ',headers);
 	        console.log('params: ',params);
 	        console.log('httpConfig',httpConfig);
-// var url = config.url;
-// dataObj = url.substr(url.indexOfLast('/'));
-// if(dataObj.search('/') > -1){
-// 	dataObj = dataObj.replace('/','');
-// }
-// if dataObj is element and not the id, then add id
 
 	        /*
 	         * FIX ISSUES FOR STAMPLAY API
@@ -99,7 +94,7 @@ module.exports = function(myApp) {
 	        }
 	    }
 
-	    function fixStamplayIssues($q) {
+	    function fixStamplayIssues($q,$scope) {
 	        return {
 	            request : function(config) {
 
@@ -113,6 +108,15 @@ module.exports = function(myApp) {
 	                // Which means that the un-editable fields in Stamplay must be 
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
+	                
+console.log('$scope',$scope);
+// var url = config.url;
+// dataObj = url.substr(url.indexOfLast('/'));
+// if(dataObj.search('/') > -1){
+// 	dataObj = dataObj.replace('/','');
+// }
+// if dataObj is element and not the id, then add id
+
 	                	if(config.file){
 	                		// PLACEHOLDER FOR FUTURE CODE
 	                	}else{
