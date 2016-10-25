@@ -9,7 +9,7 @@ export default function stamplayFileUpload(Upload) {
             'field': '&',
             'value': '=',
             'entity': '&',
-
+            'entry': '='
         },
         restrict: 'E',
         link: {
@@ -19,6 +19,7 @@ console.log('in stamplayFileUpload directive,scope',scope);
 console.log('entity',scope.entity());
 console.log('field',scope.field());
 console.log('type',scope.field()._uploadInformation.method);
+console.log('value',scope.value);
 
                 var uploadInformation = scope.field().uploadInformation();
                 if (!uploadInformation.hasOwnProperty('url')) {
