@@ -109,7 +109,7 @@ module.exports = function(myApp) {
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
 	                
-console.log('$scope',$scope);
+console.log('$scope',$rootScope);
 // var url = config.url;
 // dataObj = url.substr(url.indexOfLast('/'));
 // if(dataObj.search('/') > -1){
