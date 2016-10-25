@@ -58,7 +58,7 @@ console.log('value',scope.value);
 
                 if(field.uploadInformation.method == 'PUT'){
                     var id = scope.entry._identifierValue;
-                    scope.field.uploadInformation.url += '/' + id;
+                    field.uploadInformation.url += '/' + id;
         console.log('scope in post',scope);
                 }
 
