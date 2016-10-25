@@ -18,6 +18,7 @@ console.log('in stamplayFileUpload directive,scope',scope);
 // var entity = scope.entity();
 console.log('entity',scope.entity());
 console.log('field',scope.field());
+console.log('type',scope.field()._uploadInformation.method);
 
                 var uploadInformation = scope.field().uploadInformation();
                 if (!uploadInformation.hasOwnProperty('url')) {
