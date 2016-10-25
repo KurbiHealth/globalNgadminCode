@@ -85,7 +85,7 @@ module.exports = function(myApp) {
 	            request : requestInterceptor
 	        };
 
-	        function requestInterceptor(config) {
+	        function requestInterceptor(config,b,c,d,e) {
 	            if (angular.isDefined(config.headers['Content-Type']) && !angular.isDefined(config.data))
 	                config.data = '';
 
@@ -100,13 +100,20 @@ module.exports = function(myApp) {
 // console.log('in fixStamplayIssues()');
 
 	                config = angular.copy(config);
-console.log('config',config);
+console.log('config',config,b,c,d,e);
 	                // When NG-Admin does a list GET, it receives all fields for 
 	                // that data model, and those fields persist in the dataStore, 
 	                // even if the editionView only defines a couple of fields. 
 	                // Which means that the un-editable fields in Stamplay must be 
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
+	                	var url = config.url;
+	                	dataObj = url.substr(url.indexOfLast('/'));
+	                	if(dataObj.search('/') > -1){
+	                		dataObj = dataObj.replace('/','');
+	                	}
+	                	// if dataObj is element and not the id, then add id
+
 
 	                	if(config.file){
 	                		// PLACEHOLDER FOR FUTURE CODE
