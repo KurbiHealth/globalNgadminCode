@@ -8,15 +8,17 @@ export default function stamplayFileUpload(Upload) {
         scope: {
             'field': '&',
             'value': '=',
-            'entity': '&'
+            'entity': '&',
+
         },
         restrict: 'E',
         link: {
             pre: function(scope) {
 console.log('in stamplayFileUpload directive,scope',scope);
-var entity = scope.entity();
-console.log('entity',entity);
-throw new Error('test of error in stamplay file upload field');
+// var entity = scope.entity();
+console.log('entity',entity());
+console.log('field',field());
+
                 var uploadInformation = scope.field().uploadInformation();
                 if (!uploadInformation.hasOwnProperty('url')) {
                     throw new Error('You must provide a URL property to allow the upload of files.');
@@ -51,6 +53,8 @@ throw new Error('test of error in stamplay file upload field');
                     input.setAttribute(name, attributes[name]);
                 }
 
+                // CALLED BELOW IN DIRECTIVE
+                // <input type="file" ... ngf-select="fileSelected($files)"
                 scope.fileSelected = function(selectedFiles) {
                     if (!selectedFiles || !selectedFiles.length) {
                         return;
@@ -62,6 +66,8 @@ throw new Error('test of error in stamplay file upload field');
                     for (var file in selectedFiles) {
                         uploadParams = angular.copy(scope.field().uploadInformation());
                         uploadParams.file = selectedFiles[file];
+
+                        // ABOUT TO UPLOAD FILE(S)
                         Upload
                             .upload(uploadParams)
                             .progress(function(evt) {
