@@ -44,7 +44,7 @@ console.log('value',scope.value);
             },
             post: function(scope, element) {
                 var field = scope.field();
-                field.uploadInformation = field._uploadInformation();
+                field.uploadInformation = field._uploadInformation;
                 scope.name = field.name();
                 scope.v = field.validation();
                 if (scope.value) {
