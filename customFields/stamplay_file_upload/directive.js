@@ -13,6 +13,7 @@ export default function stamplayFileUpload(Upload) {
         restrict: 'E',
         link: {
             pre: function(scope) {
+console.log('in stamplayFileUpload directive');
                 var uploadInformation = scope.field().uploadInformation();
                 if (!uploadInformation.hasOwnProperty('url')) {
                     throw new Error('You must provide a URL property to allow the upload of files.');
@@ -97,7 +98,7 @@ export default function stamplayFileUpload(Upload) {
 `<div class="row">
     <div class="col-md-2">
         <a class="btn btn-default" ng-click="selectFile()">
-            <span translate="BROWSE"></span>
+            asdf<span translate="BROWSE"></span>
         </a>
     </div>
     <div class="col-md-10">
