@@ -1,8 +1,8 @@
 module.exports = function(myApp) {
 
-	/***************************************
-	 * RESTANGULAR INTERCEPTOR FUNCTIONS
-	 ***************************************/
+	/*******************************************
+	 * request RESTANGULAR INTERCEPTOR FUNCTIONS
+	 *******************************************/
 
 	myApp.config(function(RestangularProvider,$httpProvider) {
 
@@ -66,7 +66,7 @@ module.exports = function(myApp) {
 	 * POST-RESTANGULAR INTERCEPTOR FUNCTIONS
 	 ***************************************/
 	    
-	    // USING 'unshift' TO RUN THESE FUNCTIONS FIRST!!!!
+	    // USING 'unshift' TO RUN THESE FUNCTIONS FIRST (after the Restangular interceptor)!!!!
 	    $httpProvider.interceptors.unshift(addContentTypeToHeader);
 
 	    // these functions run in regular order (after Restangular interceptors)
@@ -100,13 +100,14 @@ module.exports = function(myApp) {
 // console.log('in fixStamplayIssues()');
 
 	                config = angular.copy(config);
-// console.log('config',config);
+console.log('config',config);
 	                // When NG-Admin does a list GET, it receives all fields for 
 	                // that data model, and those fields persist in the dataStore, 
 	                // even if the editionView only defines a couple of fields. 
 	                // Which means that the un-editable fields in Stamplay must be 
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
+
 	                	if(config.file){
 	                		// PLACEHOLDER FOR FUTURE CODE
 	                	}else{
