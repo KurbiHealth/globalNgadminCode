@@ -14,6 +14,9 @@ export default function stamplayFileUpload(Upload) {
         link: {
             pre: function(scope) {
 console.log('in stamplayFileUpload directive,scope',scope);
+var entity = scope.entity();
+console.log('entity',entity);
+throw new Error('test of error in stamplay file upload field');
                 var uploadInformation = scope.field().uploadInformation();
                 if (!uploadInformation.hasOwnProperty('url')) {
                     throw new Error('You must provide a URL property to allow the upload of files.');
