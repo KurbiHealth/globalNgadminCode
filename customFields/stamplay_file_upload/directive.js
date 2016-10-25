@@ -16,8 +16,8 @@ export default function stamplayFileUpload(Upload) {
             pre: function(scope) {
 console.log('in stamplayFileUpload directive,scope',scope);
 // var entity = scope.entity();
-console.log('entity',entity());
-console.log('field',field());
+console.log('entity',scope.entity());
+console.log('field',scope.field());
 
                 var uploadInformation = scope.field().uploadInformation();
                 if (!uploadInformation.hasOwnProperty('url')) {
