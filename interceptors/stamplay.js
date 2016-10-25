@@ -4,7 +4,7 @@ module.exports = function(myApp) {
 	 * request RESTANGULAR INTERCEPTOR FUNCTIONS
 	 *******************************************/
 
-	myApp.config(function(RestangularProvider,$httpProvider,$scope) {
+	myApp.config(function(RestangularProvider,$httpProvider,$scope,$rootScope) {
 
 	    var token = window.localStorage.getItem("http://kpadmin-jwt");
 	    if(typeof token == 'object' && token == null){
@@ -94,7 +94,7 @@ module.exports = function(myApp) {
 	        }
 	    }
 
-	    function fixStamplayIssues($q,$scope) {
+	    function fixStamplayIssues($q,$scope,$rootScope) {
 	        return {
 	            request : function(config) {
 
