@@ -94,7 +94,7 @@ module.exports = function(myApp) {
 	        }
 	    }
 
-	    function fixStamplayIssues($q,$rootScope) {
+	    function fixStamplayIssues($q,$rootScope,$scope) {
 	        return {
 	            request : function(config) {
 
@@ -109,7 +109,8 @@ module.exports = function(myApp) {
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
 	                
-console.log('$scope',$rootScope);
+console.log('$scope',$scope);
+console.log('$rootScope',$rootScope);
 // var url = config.url;
 // dataObj = url.substr(url.indexOfLast('/'));
 // if(dataObj.search('/') > -1){
