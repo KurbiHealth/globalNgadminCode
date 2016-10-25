@@ -28,6 +28,12 @@ module.exports = function(myApp) {
 	        console.log('headers: ',headers);
 	        console.log('params: ',params);
 	        console.log('httpConfig',httpConfig);
+// var url = config.url;
+// dataObj = url.substr(url.indexOfLast('/'));
+// if(dataObj.search('/') > -1){
+// 	dataObj = dataObj.replace('/','');
+// }
+// if dataObj is element and not the id, then add id
 
 	        /*
 	         * FIX ISSUES FOR STAMPLAY API
@@ -95,12 +101,12 @@ module.exports = function(myApp) {
 
 	    function fixStamplayIssues($q) {
 	        return {
-	            request : function(config,b,c,d,e) {
+	            request : function(config) {
 
 // console.log('in fixStamplayIssues()');
 
 	                config = angular.copy(config);
-console.log('config',config,b,c,d,e);
+// console.log('config',config);
 	                // When NG-Admin does a list GET, it receives all fields for 
 	                // that data model, and those fields persist in the dataStore, 
 	                // even if the editionView only defines a couple of fields. 
