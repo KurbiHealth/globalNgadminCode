@@ -94,7 +94,7 @@ module.exports = function(myApp) {
 	        }
 	    }
 
-	    function fixStamplayIssues($q,$rootScope) {
+	    function fixStamplayIssues($q) {
 	        return {
 	            request : function(config) {
 
@@ -108,16 +108,6 @@ module.exports = function(myApp) {
 	                // Which means that the un-editable fields in Stamplay must be 
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
-	                
-// console.log('$scope',$scope);
-console.log('$rootScope',$rootScope);
-// var url = config.url;
-// dataObj = url.substr(url.indexOfLast('/'));
-// if(dataObj.search('/') > -1){
-// 	dataObj = dataObj.replace('/','');
-// }
-// if dataObj is element and not the id, then add id
-
 	                	if(config.file){
 	                		// PLACEHOLDER FOR FUTURE CODE
 	                	}else{
