@@ -22,13 +22,13 @@ module.exports = function(myApp) {
 	    RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, 
 	        headers, params, httpConfig) {
 
-	        console.log('url',angular.copy(url));
-	        console.log('element: ',element);
-	        console.log('operation: ',operation);
-	        console.log('what: ',what);
-	        console.log('headers: ',headers);
-	        console.log('params: ',params);
-	        console.log('httpConfig',httpConfig);
+	        // console.log('url',angular.copy(url));
+	        // console.log('element: ',element);
+	        // console.log('operation: ',operation);
+	        // console.log('what: ',what);
+	        // console.log('headers: ',headers);
+	        // console.log('params: ',params);
+	        // console.log('httpConfig',httpConfig);
 
 	        /*
 	         * FIX ISSUES FOR STAMPLAY API
