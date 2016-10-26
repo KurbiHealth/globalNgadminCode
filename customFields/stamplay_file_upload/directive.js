@@ -6,22 +6,16 @@
 export default function stamplayFileUpload(Upload) {
     return {
         scope: {
-            'field': '&',
+            'field': '=',
             'value': '=',
-            'entity': '&',
+            'entity': '=',
             'entry': '='
         },
         restrict: 'E',
         link: {
             pre: function(scope) {
-console.log('in stamplayFileUpload directive,scope',scope);
-// var entity = scope.entity();
-console.log('entity',scope.entity());
-console.log('field',scope.field());
-console.log('type',scope.field()._uploadInformation.method);
-console.log('value',scope.value);
 
-                var uploadInformation = scope.field().uploadInformation();
+                var uploadInformation = scope.field.uploadInformation;
                 if (!uploadInformation.hasOwnProperty('url')) {
                     throw new Error('You must provide a URL property to allow the upload of files.');
                 }
