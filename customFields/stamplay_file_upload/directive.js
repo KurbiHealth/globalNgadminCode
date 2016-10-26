@@ -14,8 +14,6 @@ export default function stamplayFileUpload(Upload) {
         restrict: 'E',
         link: {
             pre: function(scope) {
-console.log('in pre, scope',scope);
-console.log('console',console);
                 if(typeof scope.field.uploadInformation === 'function')
                     var uploadInformation = angular.copy(scope.field.uploadInformation());
                 else
