@@ -16,6 +16,7 @@ export default function stamplayFileUpload(Upload) {
             pre: function(scope) {
 
                 var uploadInformation = scope.field.uploadInformation;
+    console.log('uploadInformation',uploadInformation);
                 if (!uploadInformation.hasOwnProperty('url')) {
                     throw new Error('You must provide a URL property to allow the upload of files.');
                 }
@@ -37,7 +38,7 @@ export default function stamplayFileUpload(Upload) {
                 }
             },
             post: function(scope, element) {
-                var field = scope.field();
+                var field = scope.field;
                 field.uploadInformation = field._uploadInformation;
                 scope.name = field.name();
                 scope.v = field.validation();
