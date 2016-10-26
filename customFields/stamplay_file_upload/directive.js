@@ -57,9 +57,7 @@ export default function stamplayFileUpload(Upload) {
 
                 if(field.uploadInformation.method == 'PUT'){
                     var id = scope.entry._identifierValue;
-console.log('id',id);
                     scope.field.uploadInformation.url += '/' + id;
-console.log('in post, in if(PUT), scope',scope);
                 }
 
                 // CALLED BELOW IN DIRECTIVE
@@ -113,27 +111,27 @@ console.log('in post, in if(PUT), scope',scope);
             }
         },
         template:
-`<div class="row">
-    <div class="col-md-2">
-        <a class="btn btn-default" ng-click="selectFile()">
-            <span translate="BROWSE"></span>
-        </a>
-    </div>
-    <div class="col-md-10">
-        <div class="row" ng-repeat="file in files track by $index">
-            <div class="col-md-3" style="padding-top: 6px;">
-                <div class="progress" style="margin-bottom: 0;" ng-if="file.progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ file.progress }}%;">
-                        <span class="sr-only" translate="N_COMPLETE" translate-values="{ progress: file.progress }"></span>
+        `<div class="row">
+            <div class="col-md-2">
+                <a class="btn btn-default" ng-click="selectFile()">
+                    <span translate="BROWSE"></span>
+                </a>
+            </div>
+            <div class="col-md-10">
+                <div class="row" ng-repeat="file in files track by $index">
+                    <div class="col-md-3" style="padding-top: 6px;">
+                        <div class="progress" style="margin-bottom: 0;" ng-if="file.progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ file.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ file.progress }}%;">
+                                <span class="sr-only" translate="N_COMPLETE" translate-values="{ progress: file.progress }"></span>
+                            </div>
+                        </div>
                     </div>
+                    <div class="col-md-9" style="padding-top: 6px;"><small><em>{{ file.name }}<em><small></div>
                 </div>
             </div>
-            <div class="col-md-9" style="padding-top: 6px;"><small><em>{{ file.name }}<em><small></div>
         </div>
-    </div>
-</div>
-<input type="file" ngf-multiple="multiple" accept="{{ accept }}" ngf-select="fileSelected($files)"
-       id="{{ name }}" name="{{ name }}" ng-required="v.required" style="display:none" />`
+        <input type="file" ngf-multiple="multiple" accept="{{ accept }}" ngf-select="fileSelected($files)"
+               id="{{ name }}" name="{{ name }}" ng-required="v.required" style="display:none" />`
     };
 }
 
