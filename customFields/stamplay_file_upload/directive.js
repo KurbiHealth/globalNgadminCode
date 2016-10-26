@@ -15,7 +15,7 @@ export default function stamplayFileUpload(Upload) {
         link: {
             pre: function(scope) {
 console.log('in pre, scope',scope);
-console.log('console.time',console.time());
+console.log('console',console);
                 var uploadInformation = scope.field.uploadInformation();
                 if (!uploadInformation.hasOwnProperty('url')) {
                     throw new Error('You must provide a URL property to allow the upload of files.');
@@ -53,8 +53,9 @@ console.log('console.time',console.time());
 
                 if(field.uploadInformation.method == 'PUT'){
                     var id = scope.entry._identifierValue;
-                    field.uploadInformation.url += '/' + id;
-        console.log('scope in post',scope);
+console.log('id',id);
+                    scope.field.uploadInformation.url += '/' + id;
+console.log('in post, in if(PUT), scope',scope);
                 }
 
                 // CALLED BELOW IN DIRECTIVE
