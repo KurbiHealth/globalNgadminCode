@@ -20,7 +20,7 @@ module.exports = function(admin) {
         	var errorStatus = 'Status unknown';
         }
 
-        console.log(source + 'Error: ' + errorStatus + ', ' + errorMessage);
+        console.log(source + 'Error: ' + errorStatus + ', ' + errorMessage,response);
         notification.log('Error: ' + errorStatus + ', ' + errorMessage);
 
         return 'Global ADMIN error: ' + errorStatus + '(' + errorMessage + ')';
