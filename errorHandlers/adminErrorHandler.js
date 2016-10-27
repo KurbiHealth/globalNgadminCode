@@ -15,7 +15,7 @@ module.exports = function(admin,notification) {
         }
 
         console.log('Error: ' + errorStatus + ', ' + errorMessage);
-        //notification.log('Error: ' + errorStatus + ', ' + errorMessage);
+        notification.log('Error: ' + errorStatus + ', ' + errorMessage);
 
         return 'Global ADMIN error: ' + errorStatus + '(' + errorMessage + ')';
     
