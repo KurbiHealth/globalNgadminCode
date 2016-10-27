@@ -42,7 +42,7 @@ function directiveController($scope){
      *****************************/
 	
 	matrix.init = function(headers,dropdowns){
-console.log('in matrix.init');
+// console.log('in matrix.init');
         if($scope.field._valueType == 'object'){
     		headers.map(function(h){
     			matrix.headers.push(h.label);
@@ -51,7 +51,7 @@ console.log('in matrix.init');
     		});
         }
 		if($scope.value === null){
-console.log('empty value');
+// console.log('empty value');
 			matrix.data.push(angular.copy(matrix.emptyDataObj));
 		}else{
 
