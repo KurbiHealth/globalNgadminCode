@@ -1,9 +1,7 @@
-module.exports = function(admin,notification) {
-
-console.log('notification',notification);
+module.exports = function(admin) {
 
     // Experimental Error Handler
-    function appErrorHandler(response) {
+    function appErrorHandler(response,notification) {
 
     	var source = '';
 
