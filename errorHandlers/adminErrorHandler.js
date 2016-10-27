@@ -26,7 +26,7 @@ module.exports = function(admin) {
         	var errorMessage = response.data.error.message;
         	var errorStatus = response.data.error.status;
         	var requestObj = {
-        		'url': response.config,
+        		'url': response.config.url,
         		'body': response.config.data,
         		'method': response.config.method
         	};
@@ -43,7 +43,7 @@ module.exports = function(admin) {
 
         var devErrObj = {
     		'status': errorStatus,
-    		'error_message': errorStatus,
+    		'error_message': errorMessage,
     		'request': requestObj,
     		'response': responseObj,
     		'original': response
