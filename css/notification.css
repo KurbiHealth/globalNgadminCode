@@ -58,7 +58,7 @@
 }
 .humane.humane-flatty-error,
 .humane-flatty.humane-flatty-error {
-  background-color: #e74c3c;
+  background-color: #e74c3c !important;
   color: #FFF;
 }
 .humane-animate,
