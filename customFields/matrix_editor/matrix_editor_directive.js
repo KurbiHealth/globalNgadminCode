@@ -88,7 +88,7 @@ function directiveController($scope){
             }
 
             matrix.data = $scope.value;
-console.log('matrix.data',matrix.data);
+// console.log('matrix.data',matrix.data);
             if($scope.field._valueType == 'object'){
                 for(var j in matrix.data){
                     matrix.selectedDropdown[j] = { 
@@ -130,7 +130,7 @@ console.log('matrix.data',matrix.data);
 
     $scope.$watch('matrix.data',function(newVal,oldVal){
     	var temp = matrix.data;
-console.log('----> in scope.watch <-------- scope',$scope);
+// console.log('----> in scope.watch <-------- scope',$scope);
 // console.log('temp1',temp);
         temp = temp.map(function(v){
             if($scope.isString == true){
