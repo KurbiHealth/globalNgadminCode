@@ -1,40 +1,16 @@
 module.exports = function(myApp) {
 
 	/***************************************
-	 * RESTANGULAR ERROR HANDLER (API CALLS)
-	 ***************************************/
-
-	myApp.config(function(RestangularProvider) {
-
-	  //   var refreshAccesstoken = function() {
-	  //       var deferred = $q.defer();
-
-	  //       // TO DO: Refresh access-token logic
-			// console.log('in ',__FILE,'in refreshAccesstoken()');
-
-	  //       return deferred.promise;
-	  //   };
-
-	  //   RestangularProvider.setErrorInterceptor(function(response, deferred, responseHandler) {
-	  //       if(response.status === 403) {
-	  //           refreshAccesstoken().then(function() {
-	  //               // Repeat the request and then call the handlers the usual way.
-	  //               $http(response.config).then(responseHandler, deferred.reject);
-	  //               // Be aware that no request interceptors are called this way.
-	  //           });
-
-	  //           return false; // error handled
-	  //       }
-
-	  //       return true; // error not handled
-	  //   });
-	});
-
-	/***************************************
 	 * CUSTOM ERROR MESSAGES
 	 ***************************************/
 
 	function errorHandler($rootScope, $state, $translate, notification){
+
+		/***************************
+    	 * @TODO come up with a way to determine what environment the app is in
+    	 * @TODO come up with pretty error messages for end users if in production
+    	 * @TODO add pushes to api/log if error happens in production
+    	 ***************************/
 
 		// delete the NG-Admin default error handler
 		delete $rootScope.$$listeners.$stateChangeError;
