@@ -1,7 +1,10 @@
 module.exports = function(admin) {
 
     // Experimental Error Handler
-    function appErrorHandler(response,notification) {
+    function adminErrorHandler(response,notification) {
+
+    	var humane = require('humane-js');
+    	var notify = humane.create({ timeout: 5000, clickToClose: true })
 
     	var source = '';
 
@@ -24,7 +27,7 @@ module.exports = function(admin) {
     
     }
     
-    admin.errorMessage(appErrorHandler);
+    admin.errorMessage(adminErrorHandler);
 
     return admin;
 
