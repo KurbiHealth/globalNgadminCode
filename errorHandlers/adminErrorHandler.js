@@ -3,7 +3,7 @@ module.exports = function(admin) {
     // Experimental Error Handler
     function appErrorHandler(response) {
 	
-		console.log('in globalNgadminCode/errorHandlers/adminErrorHandler.js');
+		console.log('in globalNgadminCode/errorHandlers/adminErrorHandler.js, response',response);
         
         return 'Global ADMIN error: ' + response.status + '(' + response.data + ')';
     
