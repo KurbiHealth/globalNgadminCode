@@ -4,7 +4,7 @@ module.exports = function(admin) {
     function adminErrorHandler(response,notification) {
 
     	var humane = require('humane-js');
-    	var notify = humane.create({ timeout: 5000, clickToClose: true })
+    	var notification = humane.create({ timeout: 5000, clickToClose: true })
 
     	var source = '';
 
