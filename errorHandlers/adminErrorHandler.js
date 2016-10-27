@@ -5,10 +5,13 @@ console.log('notification',notification);
     // Experimental Error Handler
     function appErrorHandler(response) {
 
+    	var source = '';
+
         if(response.error){
         	var errorMessage = response.error.message;
         	var errorStatus = response.error.status
         }else if(response.data.error){
+        	source = 'Stamplay ';
         	var errorMessage = response.data.error.message;
         	var errorStatus = response.data.error.status;
         }else{
@@ -16,7 +19,7 @@ console.log('notification',notification);
         	var errorStatus = 'Status unknown';
         }
 
-        console.log('Error: ' + errorStatus + ', ' + errorMessage);
+        console.log(source + 'Error: ' + errorStatus + ', ' + errorMessage);
         notification.log('Error: ' + errorStatus + ', ' + errorMessage);
 
         return 'Global ADMIN error: ' + errorStatus + '(' + errorMessage + ')';
