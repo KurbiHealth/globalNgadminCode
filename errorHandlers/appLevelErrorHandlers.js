@@ -34,7 +34,7 @@ module.exports = function(myApp) {
 	 * CUSTOM ERROR MESSAGES
 	 ***************************************/
 
-	function errorHandler($rootScope, $state, $translate, notification) {
+	function errorHandler($rootScope, $state, $translate, notification){
 
 		// delete the NG-Admin default error handler
 		delete $rootScope.$$listeners.$stateChangeError;
