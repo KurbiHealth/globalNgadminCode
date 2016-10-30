@@ -27,7 +27,7 @@ module.exports = function(myApp) {
 	        if(error.status == 404) {
 	            $state.go('ma-404');
 	            event.preventDefault();
-	        } else {
+	        }else{
 	        	var errorMessage;
 	        	
 	        	if(error.message){

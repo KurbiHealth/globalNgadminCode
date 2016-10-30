@@ -17,11 +17,13 @@ module.exports = function(admin) {
     	var source = '';
 
         if(response.error){
+        	// a generic response from a generic API
         	var errorMessage = response.error.message;
         	var errorStatus = response.error.status
         	var requestObj = {};
         	var responseObj = {};
         }else if(response.data.error){
+        	// when the response comes from the Stamplay API
         	source = 'Stamplay ';
         	var errorMessage = response.data.error.message;
         	var errorStatus = response.data.error.status;
@@ -46,7 +48,7 @@ module.exports = function(admin) {
     		'error_message': errorMessage,
     		'request': requestObj,
     		'response': responseObj,
-    		'original': response
+    		'_original': response
     	};
 
         console.log('ERROR',devErrObj);
