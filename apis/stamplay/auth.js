@@ -1,9 +1,9 @@
 module.exports = function(myApp) {
 
-	myApp.config(function(RestangularProvider){
-		
+	myApp.config(function(RestangularProvider,$location){
+console.log('$location',$location,'window',window);
 		// http://kpadmin-jwt
-	    var url = window.location.url;
+	    var url = $location.url;
 console.log('url',url);
 	    var token = window.localStorage.getItem(url + "-jwt");
 console.log('token',token);	    
