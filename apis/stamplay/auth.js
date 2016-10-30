@@ -4,9 +4,8 @@ module.exports = function(myApp) {
 
 		// http://kpadmin-jwt
 	    var url = window.location.origin;
-console.log('url',url);
 	    var token = window.localStorage.getItem(url + "-jwt");
-console.log('token',token);	    
+    
 	    if(typeof token == 'object' && token == null){
 	        token = '';
 	    }else{
