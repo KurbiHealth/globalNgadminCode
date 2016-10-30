@@ -6,7 +6,7 @@ module.exports = function(myApp) {
 	    var url = window.location.url;
 console.log('url',url);
 	    var token = window.localStorage.getItem(url + "-jwt");
-	    
+console.log('token',token);	    
 	    if(typeof token == 'object' && token == null){
 	        token = '';
 	    }else{
