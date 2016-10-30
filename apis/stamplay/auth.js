@@ -1,6 +1,6 @@
 module.exports = function(myApp) {
 
-	myApp.config(function(RestangularProvider,window){
+	myApp.config(function(RestangularProvider){
 console.log('window',window);
 		// http://kpadmin-jwt
 	    var url = window.location.href;
