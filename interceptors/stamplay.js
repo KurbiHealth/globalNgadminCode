@@ -88,6 +88,14 @@ module.exports = function(myApp) {
 	                config = angular.copy(config);
 
 	                if(config.method == 'POST'){
+	             		if(config.data.zones_arr){
+	             			var zones = config.data.zones_arr;
+	             			for(var i in zones){
+	             				if(typeof zones[i] == 'object'){
+	             					zones[i] = JSON.stringify(zones[i]);
+	             				}
+	             			}
+	             		}
 debugger;
 	                }
 
