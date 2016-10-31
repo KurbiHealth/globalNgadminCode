@@ -20,7 +20,7 @@ module.exports = function(myApp) {
 	        /*
 	         * FIX ISSUES FOR STAMPLAY API
 	         */
-
+debugger;
 	        if (operation == 'getList') {
 	            // FIX PAGINATION
 	            // STAMPLAY CANONICAL URL IS:
@@ -194,7 +194,7 @@ module.exports = function(myApp) {
 	        //console.log('Response',response);
 	        //console.log(typeof response.data.data);
 	        //console.log('Data',data);
-debugger;
+
 	        // ADJUST STAMPLAY'S STRUCTURE TO MATCH WHAT NG-ADMIN EXPECTS
 	        if('data' in response.data){
 	            var newData = response.data.data;
