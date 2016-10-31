@@ -20,7 +20,7 @@ module.exports = function(myApp) {
 	        /*
 	         * FIX ISSUES FOR STAMPLAY API
 	         */
-debugger;
+
 	        if (operation == 'getList') {
 	            // FIX PAGINATION
 	            // STAMPLAY CANONICAL URL IS:
@@ -85,10 +85,12 @@ debugger;
 	        return {
 	            request : function(config) {
 
-// console.log('in fixStamplayIssues()');
-
 	                config = angular.copy(config);
-// console.log('config',config);
+debugger;
+	                if(config.method == 'POST'){
+
+	                }
+
 	                // When NG-Admin does a list GET, it receives all fields for 
 	                // that data model, and those fields persist in the dataStore, 
 	                // even if the editionView only defines a couple of fields. 
