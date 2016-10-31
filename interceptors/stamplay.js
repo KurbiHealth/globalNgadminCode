@@ -25,7 +25,7 @@ module.exports = function(myApp) {
 	            // FIX PAGINATION
 	            // STAMPLAY CANONICAL URL IS:
 	            // https://bkschool.stamplayapp.com/api/cobject/v1/audio
-	            //                  ? n=10 & sort=audio_url & page=1 & per_page=10
+	            // ? n=10 & sort=audio_url & page=1 & per_page=10
 
 	            if(!params.page){
 	                params.page = params._page;
@@ -51,7 +51,7 @@ module.exports = function(myApp) {
 
 
 	/***************************************
-	 * POST-RESTANGULAR INTERCEPTOR FUNCTIONS
+	 * request POST-RESTANGULAR INTERCEPTOR FUNCTIONS
 	 ***************************************/
 	    
 	    // USING 'unshift' TO RUN THESE FUNCTIONS FIRST (after the Restangular interceptor)!!!!
@@ -183,7 +183,7 @@ module.exports = function(myApp) {
 
 
 	/********************************************
-	 * RESTANGULAR response INTERCEPTOR FUNCTIONS
+	 * response RESTANGULAR INTERCEPTOR FUNCTIONS
 	 ********************************************/
 
 	    RestangularProvider.addResponseInterceptor(function(data,operation,what,url,response,deferred){
@@ -194,7 +194,7 @@ module.exports = function(myApp) {
 	        //console.log('Response',response);
 	        //console.log(typeof response.data.data);
 	        //console.log('Data',data);
-
+debugger;
 	        // ADJUST STAMPLAY'S STRUCTURE TO MATCH WHAT NG-ADMIN EXPECTS
 	        if('data' in response.data){
 	            var newData = response.data.data;
