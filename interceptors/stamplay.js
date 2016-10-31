@@ -96,7 +96,6 @@ module.exports = function(myApp) {
 	             				}
 	             			}
 	             		}
-debugger;
 	                }
 
 	                // When NG-Admin does a list GET, it receives all fields for 
@@ -105,6 +104,18 @@ debugger;
 	                // Which means that the un-editable fields in Stamplay must be 
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
+	                	// zones_arr is an array of strings in Stamplay, needs
+	                	// processing
+	                	if(config.data.zones_arr){
+	             			var zones = config.data.zones_arr;
+	             			for(var i in zones){
+	             				if(typeof zones[i] == 'object'){
+	             					zones[i] = JSON.stringify(zones[i]);
+	             				}
+	             			}
+	             		}
+
+	             		// if this is for a file upload
 	                	if(config.file){
 	                		// PLACEHOLDER FOR FUTURE CODE
 	                	}else{
