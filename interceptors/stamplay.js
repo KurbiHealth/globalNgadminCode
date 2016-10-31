@@ -86,9 +86,9 @@ module.exports = function(myApp) {
 	            request : function(config) {
 
 	                config = angular.copy(config);
-debugger;
-	                if(config.method == 'POST'){
 
+	                if(config.method == 'POST'){
+debugger;
 	                }
 
 	                // When NG-Admin does a list GET, it receives all fields for 
