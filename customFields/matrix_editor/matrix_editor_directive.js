@@ -69,26 +69,28 @@ function directiveController($scope){
             }
 
             // if the value is an object, it should be an array of objects; check to see if the first
-            // element is a valid object, if it isn't, check to see whether 1+2 is a valid object, and so on
-            if($scope.value[0].search(/\{.*:/) > -1){
-                try{
-                    JSON.parse($scope.value[0]);
-                }catch(error){
-                    var tempArr = [];
-                    for (var i = 0; i < $scope.value.length; i=i+2) {
-                        tempArr.push(JSON.parse($scope.value[i] + ',' + $scope.value[i+1]));
+            // element is a valid object, if it isn't, check to see whether 1+2 is a valid object, and so on       
+            if($scope.field._valueType == 'object'){
+                if($scope.value[0].search(/\{.*:/) > -1){
+                    try{
+                        JSON.parse($scope.value[0]);
+                    }catch(error){
+                        var tempArr = [];
+                        for (var i = 0; i < $scope.value.length; i=i+2) {
+                            tempArr.push(JSON.parse($scope.value[i] + ',' + $scope.value[i+1]));
+                        }
+                        $scope.value = tempArr;
                     }
-                    $scope.value = tempArr;
+                }else{
+                    // make string into a sub array to make the template below work
+                    var tempValue = angular.copy($scope.value);
+                    tempValue.every(function(value,key){
+                        var temp = [];
+                        temp.push(value);
+                        $scope.value[key] = temp;
+                        return true;
+                    });
                 }
-            }else{
-                // make string into a sub array to make the template below work
-                var tempValue = angular.copy($scope.value);
-                tempValue.every(function(value,key){
-                    var temp = [];
-                    temp.push(value);
-                    $scope.value[key] = temp;
-                    return true;
-                });
             }
 
             matrix.data = $scope.value;
