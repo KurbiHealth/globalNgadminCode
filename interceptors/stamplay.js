@@ -5,7 +5,7 @@ module.exports = function(myApp) {
 	 *******************************************/
 
 	myApp.config(function(RestangularProvider,$httpProvider) {
-	  
+
 	    RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, 
 	        headers, params, httpConfig) {
 
@@ -88,6 +88,11 @@ module.exports = function(myApp) {
 	                config = angular.copy(config);
 
 	                if(config.method == 'POST'){
+	                	for(var i in config.data){
+	                		if(config.data[i] === null){
+	                			config.data[i] = '';
+	                		}
+	                	}
 	             		if(config.data.zones_arr){
 	             			var zones = config.data.zones_arr;
 	             			for(var i in zones){
@@ -106,7 +111,7 @@ module.exports = function(myApp) {
 	                if(config.method === 'PUT'){
 	                	// zones_arr is an array of strings in Stamplay, needs
 	                	// processing
-	                	if(config.data.zones_arr){
+	                	if(config.data && config.data.zones_arr){
 	             			var zones = config.data.zones_arr;
 	             			for(var i in zones){
 	             				if(typeof zones[i] == 'object'){
@@ -159,13 +164,13 @@ module.exports = function(myApp) {
 	                            delete config.params._filters[key];
 	                        }
 	                    }
-// console.log('where',where);
+
 	                    // if all the previous fixes have emptied the NGA filter object, 
 	                    // then delete it
 	                    if(isEmpty(config.params._filters)){
 	                        delete config.params._filters;
 	                    }
-// console.log('config',config);
+
 	                }
 
 	                return config || $q.when(config);

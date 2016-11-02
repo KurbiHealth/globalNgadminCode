@@ -15,7 +15,7 @@ function directiveController($scope){
     $scope.address = $scope.entity.uniqueId;
     $scope.entry = $scope.datastore.getEntries($scope.address)[0];
 
-    if($scope.viewtype == 'show'){
+    if($scope.field._valueType == 'string'){
         // derive headers from the data object itself?? (use keys?)
         $scope.isString = true;
     }
@@ -42,16 +42,20 @@ function directiveController($scope){
      *****************************/
 	
 	matrix.init = function(headers,dropdowns){
-// console.log('in matrix.init');
+
         if($scope.field._valueType == 'object'){
     		headers.map(function(h){
     			matrix.headers.push(h.label);
     			matrix.numFields++;
     			matrix.emptyDataObj[h.key] = '';
     		});
+        }else{
+            matrix.headers.push('String');
+            matrix.numFields++;
+            matrix.emptyDataObj = [];
+            matrix.emptyDataObj.push(' ');
         }
 		if($scope.value === null){
-// console.log('empty value');
 			matrix.data.push(angular.copy(matrix.emptyDataObj));
 		}else{
 
@@ -88,7 +92,7 @@ function directiveController($scope){
             }
 
             matrix.data = $scope.value;
-// console.log('matrix.data',matrix.data);
+
             if($scope.field._valueType == 'object'){
                 for(var j in matrix.data){
                     matrix.selectedDropdown[j] = { 
@@ -128,26 +132,27 @@ function directiveController($scope){
      * WATCHER
      *****************************/
 
-    $scope.$watch('matrix.data',function(newVal,oldVal){
-    	var temp = matrix.data;
-// console.log('----> in scope.watch <-------- scope',$scope);
-// console.log('temp1',temp);
-        temp = temp.map(function(v){
-            if($scope.isString == true){
-                v = v[0];
-            }
-            return JSON.stringify(v);
-        });
+    function saveValueInDatastore(newVal,oldVal){
+
+        var temp = matrix.data;
+
         if($scope.isString != true){
+            temp = temp.map(function(v){
+                if($scope.isString == true){
+                    v = v[0];
+                }
+                return JSON.stringify(v);
+            });
             temp = temp.join();
         }
-// console.log('temp',temp);
+
         $scope.entry.values[$scope.field._name] = temp;
         $scope.datastore.setEntries($scope.address,$scope.entry);
-    },true);
+    }
+
+    $scope.$watch('matrix.data',saveValueInDatastore,true);
 
     matrix.deleteRow = function(rkey){
-// console.log('deleting, rkey:',rkey);
         matrix.data.splice(rkey,1);
     }
 
@@ -253,7 +258,12 @@ function MatrixEditorDirective($compile){
                                 </div>
                                 <div ng-if="viewtype=='edit'">
                                     <div ng-if="isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey]">
-                                        <input type="text" class="form-control" ng-model="matrix.data[rkey][fkey]" />
+                                        <input 
+                                            type="text" class="form-control" 
+                                            ng-model="matrix.data[rkey][fkey]" 
+                                            ng-change="saveValueInDatastore();" 
+                                            ng-model-options="{ updateOn: 'blur mouseleave', debounce: {'blur': 0, 'mouseleave': 500} }"
+                                        >
                                     </div>
                                     <div ng-if="!isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey]" ng-class="matrix.setLast($last)">
                                         <input type="text" ng-if="!matrix.dropdowns[fkey]" class="form-control" ng-model="matrix.data[rkey][fkey]"  />

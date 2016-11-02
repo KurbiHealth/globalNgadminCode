@@ -39,6 +39,7 @@ export default function stamplayFileUpload(Upload) {
                 }
             },
             post: function(scope, element) {
+
                 var field = scope.field;
                 if(typeof scope.field.uploadInformation === 'function')
                     field.uploadInformation = angular.copy(scope.field.uploadInformation());
@@ -130,8 +131,7 @@ export default function stamplayFileUpload(Upload) {
                 </div>
             </div>
         </div>
-        <input type="file" ngf-multiple="multiple" accept="{{ accept }}" ngf-select="fileSelected($files)"
-               id="{{ name }}" name="{{ name }}" ng-required="v.required" style="display:none" />`
+        <input type="file" ngf-multiple="multiple" accept="{{ accept }}" ngf-select="fileSelected($files)" id="{{ name }}" name="{{ name }}" ng-required="v.required" style="display:none" />`
     };
 }
 
