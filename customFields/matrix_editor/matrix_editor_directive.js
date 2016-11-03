@@ -42,7 +42,7 @@ function directiveController($scope){
      *****************************/
 	
 	matrix.init = function(headers,dropdowns){
-
+debugger;
         if($scope.field._valueType == 'object'){
     		headers.map(function(h){
     			matrix.headers.push(h.label);
@@ -200,7 +200,7 @@ function MatrixEditorDirective($compile){
                         return JSON.parse(e);
                     });
                 }
-
+debugger;
             	// --- Modify CSS ---
                 // ?? override field.getCssClasses(entry) ??
                 // field._fieldValueStyles == [{fieldName:FIELDNAME, value:VALUE, cssClass:CSS-CLASS-NAME}]
@@ -244,8 +244,8 @@ function MatrixEditorDirective($compile){
                         <div class="row" ng-repeat="(rkey,rvalue) in matrix.data track by $index" style="margin-bottom:5px !important;">
                             <div style="overflow:auto;">
                                 <div ng-if="viewtype=='show'">
-                                    <div ng-if="isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey]">
-                                        <span style="text-transform:capitalize;" class="form-control">{{matrix.data[rkey][fkey]}}</>
+                                    <div ng-if="isString" class="col-md-{{matrix.numBootstrapCols}}">
+                                        <span style="text-transform:capitalize;" class="form-control">{{rvalue}}</>
                                     </div>
                                     <div ng-if="!isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey]" ng-class="matrix.setLast($last)">
                                         <input type="text" ng-if="!matrix.dropdowns[fkey]" class="form-control" ng-model="matrix.data[rkey][fkey]" />
@@ -259,10 +259,10 @@ function MatrixEditorDirective($compile){
                                     </div>
                                 </div>
                                 <div ng-if="viewtype=='edit'">
-                                    <div ng-if="isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey]">
+                                    <div ng-if="isString" class="col-md-{{matrix.numBootstrapCols}}">
                                         <input 
                                             type="text" class="form-control" 
-                                            ng-model="matrix.data[rkey][fkey]" 
+                                            ng-model="matrix.data[rkey]" 
                                             ng-change="saveValueInDatastore();" 
                                             ng-model-options="{ updateOn: 'blur mouseleave', debounce: {'blur': 0, 'mouseleave': 500} }"
                                         >
