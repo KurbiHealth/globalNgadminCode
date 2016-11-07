@@ -302,8 +302,10 @@ debugger;
                 <p ng-show="matrix.debugThis">ng-admin values</p>
                 <pre ng-show="matrix.debugThis" class="debug">{{value | json}}</pre>
                 `;
-				element.append(template);
-            	$compile(element.contents())(scope);
+                scope.$apply(function(){
+                    element.append(template);
+                    $compile(element.contents())(scope);
+                });
 
 			},
 			post: function(scope,element,attributes){
