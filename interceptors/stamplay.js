@@ -93,7 +93,8 @@ module.exports = function(myApp) {
 	                			config.data[i] = '';
 	                		}
 	                	}
-	             		if(config.data.zones_arr){
+
+	             		if(config && config.data && config.data.zones_arr){
 	             			var zones = config.data.zones_arr;
 	             			for(var i in zones){
 	             				if(typeof zones[i] == 'object'){
@@ -101,6 +102,7 @@ module.exports = function(myApp) {
 	             				}
 	             			}
 	             		}
+	             		
 	                }
 
 	                // When NG-Admin does a list GET, it receives all fields for 
