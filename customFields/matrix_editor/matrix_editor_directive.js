@@ -42,7 +42,7 @@ function directiveController($scope){
      *****************************/
 	
 	matrix.init = function(headers,dropdowns){
-debugger;
+
         if($scope.field._valueType == 'object'){
     		headers.map(function(h){
     			matrix.headers.push(h.label);
@@ -200,7 +200,7 @@ function MatrixEditorDirective($compile){
                         return JSON.parse(e);
                     });
                 }
-debugger;
+
             	// --- Modify CSS ---
                 // ?? override field.getCssClasses(entry) ??
                 // field._fieldValueStyles == [{fieldName:FIELDNAME, value:VALUE, cssClass:CSS-CLASS-NAME}]
@@ -302,10 +302,10 @@ debugger;
                 <p ng-show="matrix.debugThis">ng-admin values</p>
                 <pre ng-show="matrix.debugThis" class="debug">{{value | json}}</pre>
                 `;
-                scope.$apply(function(){
+                // scope.$apply(function(){
                     element.append(template);
                     $compile(element.contents())(scope);
-                });
+                // });
 
 			},
 			post: function(scope,element,attributes){
