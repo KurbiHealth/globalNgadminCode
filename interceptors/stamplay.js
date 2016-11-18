@@ -90,7 +90,8 @@ module.exports = function(myApp) {
 	                if(config.method == 'POST'){
 	                	for(var i in config.data){
 	                		if(config.data[i] === null){
-	                			config.data[i] = '';
+	                			// config.data[i] = '';
+	                			delete config.data[i];
 	                		}
 	                	}
 
