@@ -50,12 +50,12 @@ function directiveController($scope){
     			matrix.emptyDataObj[h.key] = '';
     		});
         }else{
-            matrix.headers.push('String');
+            matrix.headers.push('');
             matrix.numFields++;
             matrix.emptyDataObj = [];
             matrix.emptyDataObj.push(' ');
         }
-		if($scope.value === null){
+		if($scope.value === null || typeof $scope.value == 'undefined'){
 			matrix.data.push(angular.copy(matrix.emptyDataObj));
 		}else{
 
@@ -191,9 +191,8 @@ function MatrixEditorDirective($compile){
 						return false;
 					}
 				}
-
                 scope.matrix.init(config._objectDefinition,config._dropdownChoices);
-				
+
                 // PARSE STRING INTO OBJ IF NEEDED
                 if(config._jsonParse == true){
                     scope.value = scope.value.map(function(e){
