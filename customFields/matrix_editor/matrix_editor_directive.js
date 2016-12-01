@@ -246,7 +246,7 @@ function MatrixEditorDirective($compile){
                                     <div ng-if="isString" class="col-md-{{matrix.numBootstrapCols}}">
                                         <span style="text-transform:capitalize;" class="form-control">{{rvalue}}</>
                                     </div>
-                                    <div ng-if="!isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey]" ng-class="matrix.setLast($last)">
+                                    <div ng-if="!isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey] track by $index" ng-class="matrix.setLast($last)">
                                         <input type="text" ng-if="!matrix.dropdowns[fkey]" class="form-control" ng-model="matrix.data[rkey][fkey]" />
                                         <select ng-if="matrix.dropdowns[fkey]" 
                                             ng-model="matrix.selectedDropdown[rkey][fkey]" 
@@ -266,7 +266,7 @@ function MatrixEditorDirective($compile){
                                             ng-model-options="{ updateOn: 'blur mouseleave', debounce: {'blur': 0, 'mouseleave': 500} }"
                                         >
                                     </div>
-                                    <div ng-if="!isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey]" ng-class="matrix.setLast($last)">
+                                    <div ng-if="!isString" class="col-md-{{matrix.numBootstrapCols}}" ng-repeat="(fkey, fvalue) in matrix.data[rkey] track by $index" ng-class="matrix.setLast($last)">
                                         <input type="text" ng-if="!matrix.dropdowns[fkey]" class="form-control" ng-model="matrix.data[rkey][fkey]"  />
                                         <select ng-if="matrix.dropdowns[fkey]" 
                                             ng-model="matrix.selectedDropdown[rkey][fkey]" 
