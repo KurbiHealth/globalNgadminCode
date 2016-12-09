@@ -140,8 +140,7 @@ module.exports = function(myApp) {
 
 	                // translate NGA filter(s) to Stamplay format
 	                if(config.method == 'GET' && config.params){
-	                    config.params.where = {};
-	                    var where = config.params.where;
+	                    var where = {};
 
 	                    // hack to fix an NGA problem: when using 'referenced_list', 
 	                    // [object Object] appears in url
@@ -151,19 +150,32 @@ module.exports = function(myApp) {
 	                        where.chatRoomId = temp; // Stamplay uses a straight key:value pair in GET
 	                    }
 
-	                    // 'referenced_list' sends the foreign key in config.params._filters
-	                    // but it should be in config.params for Stamplay
 	                    if(config.params._filters){
 	                        var obj = config.params._filters;
 	                        for(var key in obj){
-	                            //where[key] = obj[key];
-	                            //where[key] = {"$regex": '/' + obj[key] + '/'};
+	                        	// for Stamplay, need to wrap a mongoId in 
+	                        	var value = obj[key];
+	                        	var mongoId = value.search(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i) > -1 ? true : false;
+
 	                            if(key == 'dt_create' || key == 'dt_modify'){
-	                                where[key] = {"$gte": obj[key]};
-	                                //where[key] = new Date(obj[key]);
-	                            }else{
-	                                where[key] = {"$regex": '/' + obj[key] + '/'};
+	                            
+	                                where[key] = {"$gte": obj[key]}; // TODO make this work
+	                                //where[key] = new Date(obj[key]); 
+	                            
+	                            }else if(mongoId){
+	                            	// 'referenced_list' sends the foreign key in config.params._filters
+	                    			// but it should be in config.params for Stamplay
+	                            	// where[key] = {"$regex": "[" + obj[key] + "]", "$options": 'i'};
+	                           // config.params[key] = value;
+	                        		config.params['populate'] = 'true';
+	                        	}else{
+	                            
+	                                if(obj[key] != ''){
+	                                	where[key] = {"$regex": obj[key], "$options": 'i'};
+	                                }
+	                            
 	                            }
+	                            
 	                            delete config.params._filters[key];
 	                        }
 	                    }
@@ -174,7 +186,20 @@ module.exports = function(myApp) {
 	                        delete config.params._filters;
 	                    }
 
+	                    // if there are where queries, add to parameters
+	                    if(!angular.equals(where,{})){
+	                    	config.params.where = where;
+	                    }
+
 	                }
+
+// // TRYING TO GET REFERENCES TO WORK IN SITUATIONS MODEL
+// // the code below makes a reference field (page in situations) to have [Object object] instead of the record id
+// if(config.method == 'GET' && config.params)
+// 	config.params.populate = 'true';
+// else if(config.method == 'GET' && !config.params){
+// 	config.params = {populate: 'true'};
+// }
 
 	                return config || $q.when(config);
 	            }
