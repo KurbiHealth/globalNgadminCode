@@ -5,7 +5,7 @@ module.exports = function(myApp) {
 	 *******************************************/
 
 	myApp.config(function(RestangularProvider,$httpProvider) {
-
+  
 	    RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, 
 	        headers, params, httpConfig) {
 
