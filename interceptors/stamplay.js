@@ -112,6 +112,18 @@ module.exports = function(myApp) {
 	                // Which means that the un-editable fields in Stamplay must be 
 	                // removed before doing a PUT
 	                if(config.method === 'PUT'){
+
+	                	if(config.data){
+	                		for(var i in config.data){
+		                		if(config.data[i] === null){
+		                			config.data[i] = '';
+		                		}
+		                		if(typeof config.data[i] == 'undefined'){
+		                			delete config.data[i];
+		                		}
+		                	}
+	                	}
+// debugger;
 	                	// zones_arr is an array of strings in Stamplay, needs
 	                	// processing
 	                	if(config.data && config.data.zones_arr){
@@ -138,7 +150,7 @@ module.exports = function(myApp) {
 	                	}
 	                }
 
-	                // translate NGA filter(s) to Stamplay format
+	                // translate NGAdmin filter(s) to Stamplay format
 	                if(config.method == 'GET' && config.params){
 	                    var where = {};
 
@@ -154,27 +166,29 @@ module.exports = function(myApp) {
 	                        var obj = config.params._filters;
 	                        for(var key in obj){
 	                        	// for Stamplay, need to wrap a mongoId in 
-	                        	var value = obj[key];
-	                        	var mongoId = value.search(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i) > -1 ? true : false;
-
-	                            if(key == 'dt_create' || key == 'dt_modify'){
+	                        	if(obj[key]){
+	                        		var value = obj[key];
+	                        		var mongoId = value.search(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i) > -1 ? true : false;
+	                        	
+	                        		if(key == 'dt_create' || key == 'dt_modify'){
 	                            
-	                                where[key] = {"$gte": obj[key]}; // TODO make this work
-	                                //where[key] = new Date(obj[key]); 
-	                            
-	                            }else if(mongoId){
-	                            	// 'referenced_list' sends the foreign key in config.params._filters
-	                    			// but it should be in config.params for Stamplay
-	                            	// where[key] = {"$regex": "[" + obj[key] + "]", "$options": 'i'};
-	                           // config.params[key] = value;
-	                        		config.params['populate'] = 'true';
-	                        	}else{
-	                            
-	                                if(obj[key] != ''){
-	                                	where[key] = {"$regex": obj[key], "$options": 'i'};
-	                                }
-	                            
-	                            }
+		                                where[key] = {"$gte": obj[key]}; // TODO make this work
+		                                //where[key] = new Date(obj[key]); 
+		                            
+		                            }else if(mongoId){
+		                            	// 'referenced_list' sends the foreign key in config.params._filters
+		                    			// but it should be in config.params for Stamplay
+		                            	// where[key] = {"$regex": "[" + obj[key] + "]", "$options": 'i'};
+		                           // config.params[key] = value;
+		                        		config.params['populate'] = 'true';
+		                        	}else{
+		                            
+		                                if(obj[key] != ''){
+		                                	where[key] = {"$regex": obj[key], "$options": 'i'};
+		                                }
+		                            
+		                            }
+	                        	}
 	                            
 	                            delete config.params._filters[key];
 	                        }
