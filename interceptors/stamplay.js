@@ -116,14 +116,19 @@ module.exports = function(myApp) {
 	                	if(config.data){
 	                		for(var i in config.data){
 		                		if(config.data[i] === null){
-		                			config.data[i] = '';
+		                			// this is a temporary fix, need to 
+		                			// make it more stable
+		                			if(i == 'featureVideo')
+		                				config.data[i] = [];
+		                			else
+		                				config.data[i] = '';
 		                		}
 		                		if(typeof config.data[i] == 'undefined'){
 		                			delete config.data[i];
 		                		}
 		                	}
 	                	}
-// debugger;
+
 	                	// zones_arr is an array of strings in Stamplay, needs
 	                	// processing
 	                	if(config.data && config.data.zones_arr){
